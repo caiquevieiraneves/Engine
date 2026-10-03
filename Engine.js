@@ -1,0 +1,47 @@
+export class DisplayModule{
+  constructor(Canvas){
+    this.Canvas = Canvas
+    this.Context = Canvas.getContext('2d');
+  }
+  fill(x,y){
+    this.Context.fillStyle = "#ffff";
+    this.Context.fillRect(x,y,1,1);
+  }
+}
+
+export class PointerModule{
+  Pointer = {x: 0, y: 0}
+  Mouse = {dx: 0, dy: 0, x: 0, y: 0, down: false}
+  Pen = {dx: 0, dy: 0, x: 0, y: 0, down: false, id: false}
+  constructor(Canvas){
+    this.Touches = new Map()
+    Canvas.addEventListener("pointerdown", (Event) => {
+      if(Event.pointerType == "pen"){
+        this.Pen.down = true
+        this.Pen.id = Event.PointerId
+      }
+    })
+    Canvas.addEventListener("pointermove", (Event) => {
+      if(Event.pointerType == "pen"){
+        const Pos = Canvas.getBoundingClientRect();
+        let x = (Event.clientX-Pos.left) * (Canvas.width / Pos.width);
+        let y = (Event.clientY-Pos.top) * (Canvas.height / Pos.height);
+        this.Pointer.x = x;
+        this.Pointer.y = y;
+        console.log(this.Pointer);
+      }
+    })
+    Canvas.addEventListener("pointerup", (Event) => {
+      if(Event.pointerType == "pen"){
+        this.Pen.down = true
+        this.Pen.id = Event.PointerId
+      }
+    })
+    Canvas.addEventListener("pointercancel", (Event) => {
+      if(Event.pointerType == "pen"){
+        this.Pen.down = true
+        this.Pen.id = Event.PointerId
+      }
+    })
+  }
+}
