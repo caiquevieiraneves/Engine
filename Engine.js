@@ -22,13 +22,12 @@ export class PointerModule{
       }
     })
     Canvas.addEventListener("pointermove", (Event) => {
-      if(Event.pointerType == "pen"){
+      if(Event.pointerType == "pen" || Event.pointerType == "mouse"){
         const Pos = Canvas.getBoundingClientRect();
         let x = (Event.clientX-Pos.left) * (Canvas.width / Pos.width);
         let y = (Event.clientY-Pos.top) * (Canvas.height / Pos.height);
         this.Pointer.x = x;
         this.Pointer.y = y;
-        console.log(this.Pointer);
       }
     })
     Canvas.addEventListener("pointerup", (Event) => {
