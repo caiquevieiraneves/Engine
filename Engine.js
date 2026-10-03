@@ -17,7 +17,7 @@ export class PointerModule{
     this.Touches = new Map()
     Canvas.addEventListener("pointerdown", (Event) => {
       if(Event.pointerType == "pen"){
-        this.Pen.down = true
+        this.Pointer.down = true
         this.Pen.id = Event.PointerId
       }
     })
@@ -32,13 +32,13 @@ export class PointerModule{
     })
     Canvas.addEventListener("pointerup", (Event) => {
       if(Event.pointerType == "pen"){
-        this.Pen.down = false
+        this.Pointer.down = false
         this.Pen.id = Event.PointerId
       }
     })
     Canvas.addEventListener("pointercancel", (Event) => {
       if(Event.pointerType == "pen"){
-        this.Pen.down = false
+        this.Pointer.down = false
         this.Pen.id = Event.PointerId
       }
     })
