@@ -10,7 +10,7 @@ export class DisplayModule{
 }
 
 export class PointerModule{
-  Pointer = {x: 0, y: 0}
+  Pointer = {dx: 0, dy: 0, x: 0, y: 0, down: false}
   Mouse = {dx: 0, dy: 0, x: 0, y: 0, down: false}
   Pen = {dx: 0, dy: 0, x: 0, y: 0, down: false, id: false}
   constructor(Canvas){
@@ -32,13 +32,13 @@ export class PointerModule{
     })
     Canvas.addEventListener("pointerup", (Event) => {
       if(Event.pointerType == "pen"){
-        this.Pen.down = true
+        this.Pen.down = false
         this.Pen.id = Event.PointerId
       }
     })
     Canvas.addEventListener("pointercancel", (Event) => {
       if(Event.pointerType == "pen"){
-        this.Pen.down = true
+        this.Pen.down = false
         this.Pen.id = Event.PointerId
       }
     })
