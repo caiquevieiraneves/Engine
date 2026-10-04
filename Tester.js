@@ -1,10 +1,7 @@
-import {DisplayModule} from "./Engine.js"
+import {CanvasHandler} from "./Canvas.js"
 
-const Display = new DisplayModule(document.querySelector("Canvas"))
-const Pointer = new PointerModule(document.querySelector("Canvas"))
+const CanvasElement = document.querySelector('Canvas')
 
-setInterval(() => {
-  if(Pointer.Pointer.down){
-    Display.fill(Math.floor(Pointer.Pointer.x),Math.floor(Pointer.Pointer.y))
-  }
-},1)
+const Canvas = new CanvasHandler(CanvasElement,'2d')
+
+Canvas.draw("rect",[0,0],[100,100])
