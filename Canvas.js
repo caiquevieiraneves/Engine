@@ -6,7 +6,7 @@ export class CanvasHandler{
     draw(Obj="rect",Pos=[0,0],Size=[0,0],Color="#ffff"){
         switch(Obj){
             case "rect":{
-                alert(Foi)
+                alert("foi")
             }
         }
     }
