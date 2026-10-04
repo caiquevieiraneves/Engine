@@ -1,4 +1,4 @@
-import {DisplayModule, PointerModule} from "./Engine.js"
+import {DisplayModule} from "./Engine.js"
 
 const Display = new DisplayModule(document.querySelector("Canvas"))
 const Pointer = new PointerModule(document.querySelector("Canvas"))
