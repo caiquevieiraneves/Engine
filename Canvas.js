@@ -27,7 +27,8 @@ export class PointerHandler {
         //Events
 
         Canvas.addEventListener("pointerdown", (Event) => {
-            const rect = this.Canvas.getBoundingClientRect()
+            const rect = this.Canvas.getBoundingClientRect();
+            const Pos = this.posToContext(Event);
 
             switch (Event.pointerType) {
                 case "mouse": {
@@ -36,24 +37,46 @@ export class PointerHandler {
                 case "pen": {
                     this.Pen.IsDown = true;
                 }
+                case "touch": {
+                    this.Touches.set(Event.pointerId,{Pos: Pos, Id: Event.pointerId})
+                }
             }
             if (this.Pointer.Id == null) {
                 this.Pointer.Id = Event.pointerId;
-                this.Pointer.Pos = this.posToContext(Event)
+                this.Pointer.Pos = Pos;
             }
         })
         Canvas.addEventListener("pointermove", (Event) => {
-
+            const Pos = this.posToContext(Event);
             switch (Event.pointerType) {
                 case "mouse": {
-
+                  this.Mouse.Pos = Pos;
+                }
+                case "touch": {
+                  this.Touches.get(Event.pointerId).Pos = Pos;
                 }
             }
             if (this.Pointer.Id == Event.pointerId) {
-                this.Pointer.Pos = this.posToContext(Event);
+                this.Pointer.Pos = Pos;
             }
-        })
-        document.addEventListener("pointerup", (Event) => {
+        });
+        ['pointerup','pointerleave','pointercancel'].forEach(EvName => {document.addEventListener(EvName, (Event) => {
+            switch (Event.pointerType) {
+                case "mouse": {
+                    this.Mouse.IsDown = false;
+                }
+                case "pen": {
+                    this.Pen.IsDown = false;
+                }
+                case "touch": {
+                    this.Touches.delete(Event.pointerId)
+                }
+            }
+            if (this.Pointer.Id == Event.pointerId) {
+                this.Pointer.Id = null;
+            }
+        })});
+        /*document.addEventListener("pointerleave", (Event) => {
             switch (Event.pointerType) {
                 case "mouse": {
                     this.Mouse.IsDown = false;
@@ -65,20 +88,7 @@ export class PointerHandler {
             if (this.Pointer.Id == Event.pointerId) {
                 this.Pointer.Id = null;
             }
-        })
-        document.addEventListener("pointerleave", (Event) => {
-            switch (Event.pointerType) {
-                case "mouse": {
-                    this.Mouse.IsDown = false;
-                }
-                case "pen": {
-                    this.Pen.IsDown = false;
-                }
-            }
-            if (this.Pointer.Id == Event.pointerId) {
-                this.Pointer.Id = null;
-            }
-        })
+        })*/
     }
     posToContext(Event) {
         const rect = this.Canvas.getBoundingClientRect()
