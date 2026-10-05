@@ -5,4 +5,9 @@ const CanvasElement = document.querySelector('Canvas')
 const Canvas = new CanvasHandler(CanvasElement,'2d')
 const Pointer = new PointerHandler(CanvasElement)
 
-setInterval(()=>{Canvas.draw("rect",Pointer.Pointer.Pos,[10,10],"#ffff")},1)
+setInterval(()=>{
+  for(const [i,v] of Pointer.Touches){
+    Canvas.draw("rect",v.Pos,[1,1],"#ffff")
+  }
+  console.log(Pointer.Touches.size)
+},100)
