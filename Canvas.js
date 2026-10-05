@@ -33,6 +33,9 @@ export class PointerHandler {
                 case "mouse": {
                     this.Mouse.IsDown = true;
                 }
+                case "pen": {
+                    this.Pen.IsDown = true;
+                }
             }
             if (this.Pointer.Id == null) {
                 this.Pointer.Id = Event.pointerId;
@@ -54,7 +57,9 @@ export class PointerHandler {
             switch (Event.pointerType) {
                 case "mouse": {
                     this.Mouse.IsDown = false;
-                    console.log("subiu");
+                }
+                case "pen": {
+                    this.Pen.IsDown = false;
                 }
             }
             if (this.Pointer.Id == Event.pointerId) {
@@ -62,6 +67,14 @@ export class PointerHandler {
             }
         })
         document.addEventListener("pointerleave", (Event) => {
+            switch (Event.pointerType) {
+                case "mouse": {
+                    this.Mouse.IsDown = false;
+                }
+                case "pen": {
+                    this.Pen.IsDown = false;
+                }
+            }
             if (this.Pointer.Id == Event.pointerId) {
                 this.Pointer.Id = null;
             }
