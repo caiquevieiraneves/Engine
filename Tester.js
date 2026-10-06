@@ -1,4 +1,4 @@
-import {CanvasHandler, PointerHandler} from "./Canvas.js"
+import {CanvasHandler, PointerHandler, vec2} from "./Canvas.js"
 
 const CanvasElement = document.querySelector('Canvas')
 
@@ -7,7 +7,6 @@ const Pointer = new PointerHandler(CanvasElement)
 
 setInterval(()=>{
   for(const [i,v] of Pointer.Touches){
-    Canvas.draw("rect",v.Pos,[1,1],"#ffff")
+    Canvas.draw("circle",vec2.add(v.Pos,[0,-3]),[5,2],"#ffff")
   }
-  console.log(Pointer.Touches.size)
-},100)
+},10)
