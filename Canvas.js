@@ -3,15 +3,13 @@ export class CanvasHandler {
         this.Canvas = Canvas;
         this.Context = Canvas.getContext(Context);
     }
-    draw(Obj = "rect", Pos = [0, 0], Size = [0, 0], Color = "#ffff") {
+    draw(Obj = "rect", Pos = [0, 0], Size = [0, 0], Color = "#ffffff") {
         switch (Obj) {
             case "rect": {
                 this.Context.fillStyle = Color;
                 this.Context.fillRect(Pos[0], Pos[1], Size[0], Size[1]);
                 break;
             }
-        }
-        switch (Obj) {
             case "circle": {
                 this.Context.fillStyle = Color;
                 this.Context.beginPath();
@@ -20,6 +18,16 @@ export class CanvasHandler {
                 break;
             }
         }
+    };
+    drawRect({Pos=[0,0],Size=[0,0],Color="#ffff",Stroke="#ffff", Angle=0, Anchor=[0,0]}={}){
+        this.Context.save()
+        this.Context.fillStyle = Color;
+        this.Context.translate(Pos[0],Pos[1]);
+        this.Context.rotate(Angle)
+        this.Context.beginPath();
+        this.Context.rect(Size[0]*-Anchor[0],Size[1]*-Anchor[1],Size[0],Size[1])
+        this.Context.fill();
+        this.Context.restore();
     }
 }
 
