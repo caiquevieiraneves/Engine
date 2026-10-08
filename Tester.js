@@ -7,6 +7,6 @@ const Pointer = new PointerHandler(CanvasElement)
 
 setInterval(()=>{
   for(const [i,v] of Pointer.Touches){
-    Canvas.draw("circle",vec2.add(v.Pos,[0,-3]),[5,2],"#ffff")
+    Canvas.drawRect({Pos: v.Pos, Size:[5,5], Anchor:[1,1], Angle: 1})
   }
 },10)
