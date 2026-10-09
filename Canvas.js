@@ -19,15 +19,60 @@ export class CanvasHandler {
             }
         }
     };
-    drawRect({Pos=[0,0],Size=[0,0],Color="#ffff",Stroke="#ffff", Angle=0, Anchor=[0,0]}={}){
+    drawRect({Pos=[0,0],Size=[0,0],Color="#ffff",Stroke=null, StrokeSize = 1, Angle=0, Anchor=[0,0]}={}){
         this.Context.save()
-        this.Context.fillStyle = Color;
         this.Context.translate(Pos[0],Pos[1]);
         this.Context.rotate(Angle)
         this.Context.beginPath();
         this.Context.rect(Size[0]*-Anchor[0],Size[1]*-Anchor[1],Size[0],Size[1])
+        if(Color){
+        this.Context.fillStyle = Color;
         this.Context.fill();
+        }
+        if(Stroke){
+            this.Context.strokeStyle = Stroke;
+            this.Context.lineWidth = StrokeSize
+            this.Context.stroke();
+        }
         this.Context.restore();
+    }
+    drawEllipse({Pos=[0,0],Size=[0,0],Color="#ffff",Stroke=null, StrokeSize = 1, Angle=0, Delta = 0, StartAngle = 0, EndAngle = 2*Math.PI, Clockwise = false, Anchor=[0,0]}={}){
+        this.Context.save()
+        this.Context.translate(Pos[0],Pos[1]);
+        this.Context.rotate(Angle)
+        this.Context.beginPath();
+        this.Context.ellipse(Size[0]*(Anchor[0]),Size[1]*(Anchor[1]),Size[0],Size[1],Delta,StartAngle,EndAngle,Clockwise)
+        if(Color){
+        this.Context.fillStyle = Color;
+        this.Context.fill();
+        }
+        if(Stroke){
+            this.Context.strokeStyle = Stroke;
+            this.Context.lineWidth = StrokeSize;
+            this.Context.stroke();
+        }
+        this.Context.restore();
+    }
+    drawText({Pos=[0,0],Color="#ffff",Stroke=null, StrokeSize = 1, Angle=0, Anchor=[0,0], Font = "bold 60px sans-serif", Text = ""}={}){
+        this.Context.save()
+        this.Context.translate(Pos[0],Pos[1]);
+        this.Context.rotate(Angle)
+        this.Context.beginPath();
+        if(Color){
+            this.Context.fillStyle = Color;
+            this.Context.font = Font;
+            this.Context.fillText(Text, 0,0)
+        }
+        if(Stroke){
+            this.Context.strokeStyle = Stroke;
+            this.Context.lineWidth = StrokeSize;
+            this.Context.font = Font;
+            this.Context.strokeText(Text, 0,0)
+        }
+        this.Context.restore();
+    }
+    flip(){
+        this.Context.clearRect(0,0,this.Canvas.width,this.Canvas.height)
     }
 }
 
