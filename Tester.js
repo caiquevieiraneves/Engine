@@ -1,5 +1,5 @@
 import {CanvasHandler, PointerHandler, vec2} from "./Canvas.js"
-import {BoxEngine} from "./Engine"
+import {BoxEngine} from "./Engine.js"
 const CanvasElement = document.querySelector('Canvas')
 
 const Canvas = new CanvasHandler(CanvasElement,'2d')
