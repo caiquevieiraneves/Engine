@@ -1,14 +1,16 @@
 function boxSolve(Obj0, Obj1){
   const
-    Dx = Obj0.Pos[0]-Obj1.Pos[1],
-    Dy = Obj0.Pos[0]-Obj1.Pos[1];
+    Dx = Obj0.Pos[0]-Obj1.Pos[0],
+    Dy = Obj0.Pos[1]-Obj1.Pos[1];
   const
     deltaX = (Obj0.Size[0]+Obj1.Size[0])/2 - Math.abs(Dx),
     deltaY = (Obj0.Size[1]+Obj1.Size[1])/2 - Math.abs(Dy);
-  Obj0.Pos = [
-    Obj0.Pos[0]+Math.max(0,deltaX),
-    Obj0.Pos[1]
-  ]
+  if(deltaX <= 0 || deltaY <= 0){return}
+  if(deltaX < deltaY){
+    Obj0.Pos[0] += deltaX*Math.sign(Dx)
+  }else{
+    Obj0.Pos[1] += deltaY*Math.sign(Dy)
+  }
 }
 export class BoxEngine{
   static solveArray(Objs){
