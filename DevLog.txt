@@ -1,0 +1,1 @@
+Use variacoes posicao para resolver as colisoes
