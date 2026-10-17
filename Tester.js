@@ -1,14 +1,17 @@
 import {CanvasHandler, PointerHandler, vec2} from "./Canvas.js"
-
+import {BoxEngine} from "./Engine"
 const CanvasElement = document.querySelector('Canvas')
 
 const Canvas = new CanvasHandler(CanvasElement,'2d')
 const Pointer = new PointerHandler(CanvasElement)
 
-let Ang = 0
+let Objs = [{Pos: [100,100],Size:[100,100]},{Pos: [300,300], Size: [200,200]}]
+
 setInterval(()=>{
-  Ang += 0.005
+  Objs[0].Pos = Pointer.Pointer.Pos
+  BoxEngine.solveArray(Objs)
   Canvas.flip()
-  //Canvas.drawEllipse({Color: "rgba(197, 42, 42, 0.1)", Stroke:"", StrokeSize: 1, Pos: Pointer.Pointer.Pos, Size:[60,30], Anchor:[-1,0], Angle: Ang, Delta: 3.14/2,EndAngle: Math.PI})
-  Canvas.drawText({Color:"", Stroke:"#ffff", Pos: Pointer.Pointer.Pos, Text: "Ola Marilene"})
-},10)
+  for(const Obj of Objs){
+    Canvas.drawRect({Pos: Obj.Pos, Size: Obj.Size, Anchor:[0.5,0.5]})
+  }
+},1)
