@@ -14,7 +14,7 @@ BoxEngine.initArray(Objs)
 
 setInterval(()=>{
   Objs[0].Pos = Pointer.Pointer.Pos
-  BoxEngine.solveArray(Objs)
+  BoxEngine.quickSolve(Objs)
   Canvas.flip()
   for(const Obj of Objs){
     Canvas.drawRect({Pos: Obj.Pos, Size: Obj.Size, Anchor:[0.5,0.5]})
