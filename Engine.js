@@ -46,3 +46,7 @@ export class CircleSolver {
     }
   }
 }
+
+export class ShapeSolver {
+  
+}
