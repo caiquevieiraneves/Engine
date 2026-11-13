@@ -10,7 +10,6 @@ let Objs = [
   {Pos: [300,300], Size: [200,200]},
   {Pos: [400,300], Size: [100,100]}
 ]
-BoxEngine.initArray(Objs)
 
 setInterval(()=>{
   Objs[0].Pos = Pointer.Pointer.Pos

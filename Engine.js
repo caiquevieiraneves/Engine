@@ -23,9 +23,4 @@ export class BoxEngine {
       }
     }
   }
-  static initArray(Objs) {
-    for (const Obj of Objs) {
-      Obj.Apos = [Obj.Pos[0], Obj.Pos[1]]
-    }
-  }
 }
