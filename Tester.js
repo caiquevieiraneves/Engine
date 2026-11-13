@@ -1,5 +1,5 @@
 import {CanvasHandler, PointerHandler, vec2} from "./Canvas.js"
-import {BoxEngine} from "./Engine.js"
+import {BoxSolver, CircleSolver} from "./Engine.js"
 const CanvasElement = document.querySelector('Canvas')
 
 const Canvas = new CanvasHandler(CanvasElement,'2d')
@@ -13,9 +13,9 @@ let Objs = [
 
 setInterval(()=>{
   Objs[0].Pos = Pointer.Pointer.Pos
-  BoxEngine.quickSolve(Objs)
+  CircleSolver.quickSolve(Objs)
   Canvas.flip()
   for(const Obj of Objs){
-    Canvas.drawRect({Pos: Obj.Pos, Size: Obj.Size, Anchor:[0.5,0.5]})
+    Canvas.drawEllipse({Pos: Obj.Pos, Size: [Obj.Size[0],Obj.Size[1]], Anchor:[0,0]})
   }
 },1)

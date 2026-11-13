@@ -41,7 +41,7 @@ export class CanvasHandler {
         this.Context.translate(Pos[0],Pos[1]);
         this.Context.rotate(Angle)
         this.Context.beginPath();
-        this.Context.ellipse(Size[0]*(Anchor[0]),Size[1]*(Anchor[1]),Size[0],Size[1],Delta,StartAngle,EndAngle,Clockwise)
+        this.Context.ellipse(Size[0]*(Anchor[0]),Size[1]*(Anchor[1]),Size[0]/2,Size[1]/2,Delta,StartAngle,EndAngle,Clockwise)
         if(Color){
         this.Context.fillStyle = Color;
         this.Context.fill();
