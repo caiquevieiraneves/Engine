@@ -74,6 +74,28 @@ export class CanvasHandler {
     flip(){
         this.Context.clearRect(0,0,this.Canvas.width,this.Canvas.height)
     }
+    drawShape({Pos=[0,0],Matrix=[],Color="#ffff",Stroke=null, StrokeSize = 1, Angle=0, Anchor=[0,0]}={}){
+        this.Context.save();
+            this.Context.translate(Pos[0],Pos[1]);
+            this.Context.rotate(Angle)
+            this.Context.beginPath();
+                this.Context.moveTo(Matrix[0][0],Matrix[0][1])
+                for(let i = 1; i < Matrix.length; i++){
+                    this.Context.lineTo(Matrix[i][0],Matrix[i][1])
+                }
+            this.Context.closePath();
+
+            if(Color){
+            this.Context.fillStyle = Color;
+            this.Context.fill();
+            }
+            if(Stroke){
+                this.Context.strokeStyle = Stroke;
+                this.Context.lineWidth = StrokeSize
+                this.Context.stroke();
+            }
+        this.Context.restore();
+    }
 }
 
 export class PointerHandler {

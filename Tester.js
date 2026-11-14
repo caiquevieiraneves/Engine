@@ -5,17 +5,17 @@ const CanvasElement = document.querySelector('Canvas')
 const Canvas = new CanvasHandler(CanvasElement,'2d')
 const Pointer = new PointerHandler(CanvasElement)
 let Objs = [
-  {Pos: [100,100],Size:[100,100]},
-  {Pos: [30,300], Size: [20,20]},
-  {Pos: [300,300], Size: [200,200]},
-  {Pos: [400,300], Size: [100,100]}
+  {Pos: [100,100],Matrix: [[-100,100], [100,100], [0,-100]], Color: ""}
 ]
 
 setInterval(()=>{
   Objs[0].Pos = Pointer.Pointer.Pos
-  CircleSolver.quickSolve(Objs)
+
+
+
   Canvas.flip()
   for(const Obj of Objs){
-    Canvas.drawEllipse({Pos: Obj.Pos, Size: [Obj.Size[0],Obj.Size[1]], Anchor:[0,0]})
+    Canvas.drawShape({Pos: Obj.Pos, Matrix: Obj.Matrix, Color: Obj.Color, Stroke:"#ffff"})
   }
+
 },1)
